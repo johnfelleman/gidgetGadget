@@ -6,37 +6,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
 
-        <title>Award Optimizer</title>
+        <title>Gidget Gadget</title>
 
         <script src="js/angular.min.js"></script>
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <!-- link href="starter-template.css" rel="stylesheet" -->
-
-
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <!-- script src="js/ie10-viewport-bug-workaround.js"></script -->
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
    </head>
 
-   <body ng-app="awardOptimizer">
-        <div ng-controller="criteriaController">
+   <body ng-app="gidget" ng-csp>
+        <div ng-controller="gidgetController">
 
-           <div class="ng-hide jumbotron" ng-hide="toolMode">
+           <div class="jumbotron ng-hide">
               <h2>
-                 Award Optimizer<br />
+                 Share or save items<br />
                  <small>
-                    Prototype digital service recommends OASIS or MAS based on user
-                    needs.
+                    Prototype Chrome extension interacts with Acquisition Gateway.
                  </small>
               <h2>
            </div> <!-- jumbotron -->
@@ -44,72 +29,32 @@
            <div class="container">
                <div class="panel panel-default">
                    <div class="panel-heading">
-                     <h3 class="panel-title">Select Primary Requirement</h3>
+                     <h3 class="panel-title">Let Gidget help you connect.</h3>
                    </div> <!-- panel-heading -->
-                   <div class="panel-body">
-               <select ng-model="primaryCriterion"
-                    ng-options="opt as opt.label for opt in primaryRequirement">
-               </select>
+                   <div ng-model="url" class="panel-body">
+                     <form role="form">
+                       <div class="form-group">
+                           <label for="pageUrl">URL</label>
+                           <input type="text" class="form-control"
+                                   id="pageUrl" value="{{url}}">
+                           <p class="help-block">
+                              This is the URL of the page to be saved.
+                           </p>
+                       </div>
+                       <div class="form-group">
+                           <label for="pageComment">Your comments&hellip;</label>
+                           <textarea rows="4" autofocus class="form-control"
+                                   id="pageComment" placeholder="Enter your personal comments on this item." ng-model="comment">
+                           </textarea>
+                           <p class="help-block">
+                              This page will be saved.
+                           </p>
+                       </div>
+                       <button type="reset" class="btn btn-danger">Cancel</button>
+                       <button type="submit" class="btn btn-success">Save</button>
+                     </form>
                    </div> <!-- panel-body -->
                </div> <!-- panel-default -->
-               <div class="ng-hide" ng-show="(primaryCriterion.awardOption === 'equal')">
-                   <div class="panel panel-default">
-                       <div class="panel-heading">
-                         <h3 class="panel-title">Additional Requirements</h3>
-                       </div> <!-- panel-heading -->
-                       <div class="panel-body">
-               <div class="ng-hide" ng-show="(primaryCriterion.awardOption === 'equal')">
-                    <p class="bg-info">
-                        For your needs, OASIS and MAS are both possible solutions.
-                        Please indicate any additional requirements so that we can
-                        refine our recommendation.
-                    </p>
-               </div>
-                            <div ng-repeat="secReq in secReqs">
-                               <div class="checkbox">
-                                 <label>
-                                     <input type="checkbox"
-                                         ng-model="secReq.value"
-                                         ng-true-value="'YES'"
-                                         ng-false-value="'NO'"
-                                         ng-change="checkboxChanged()">
-                                     {{ secReq.label }}
-                                 </label>
-                              </div> <!-- checkbox -->
-                            </div> <!-- ng-repeat -->
-                       </div> <!-- panel-body -->
-                   </div> <!-- panel-default -->
-               </div> <!-- ng-hide -->
-               <div class="panel panel-default">
-                   <div class="panel-heading">
-                     <h3 class="panel-title">Recommendations</h3>
-                   </div> <!-- panel-heading -->
-                   <div class="panel-body">
-               <div class="ng-hide" ng-show="(primaryCriterion.awardOption === 'na')">
-                    Unfortunately neither OASIS nor MAS is a good choice for your requirement.
-               </div>
-               <div class="ng-hide" ng-show="(primaryCriterion.awardOption === 'mas')">
-                    For your requirement, we recommend evaluating MAS
-               </div>
-               <div class="ng-hide" ng-show="(primaryCriterion.awardOption === 'equal')">
-                   <h3 class="bg-info">Based on your selections we have scored your options.</h3>
-                   <div class="row">
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                            <h4>OASIS</h4>
-                            <h2><span class="label label-default">
-                                {{ oasisScore }}
-                            </span><h2>
-                        </div> <!-- class="col-md-2 col-sm-2 col-xs-2" -->
-                        <div class="col-md-2 col-sm-1 col-xs-2">
-                            <h4>MAS</h4>
-                            <h2><span class="label label-default">
-                                {{ masScore }}
-                            </span><h2>
-                        </div> <!-- class="col-md-2 col-sm-2 col-xs-2" -->
-                   </div> <!-- class="row" -->
-                   </div> <!-- panel-body -->
-               </div> <!-- panel-default -->
-
            </div> <!-- class="container" -->
        <div>
 
@@ -119,7 +64,7 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/awardPicker.js"></script>
+    <script src="js/dialog.js"></script>
 </body>
 <footer>
 </footer>
